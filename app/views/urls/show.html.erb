@@ -3,10 +3,11 @@
     <ul class="card-panel collection with-header">
       <li class="collection-header">
         <h4>
-          Stats for <%= visit_url(@url.short_url) %>
+          Stats For
+          <%= link_to @url.shortened_url, visit_url(url: @url.short_url) %>
         </h4>
       </li>
-      <li class="collection-item">Created <%= @url.created_at.strftime('%b %d, %Y') %></li>
+      <li class="collection-item">Created <%= @url.created_at.strftime('%b   %d, %Y') %></li>
       <li class="collection-item">
         Original URL: <%= link_to @url.original_url %>
       </li>
