@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get ':url', to: 'urls#visit', as: :visit
 
-  resources :urls, only: %i[index create], param: :url do
+  resources :urls, only: %i[create], param: :url do
     get :stats, to: 'urls#show', on: :member
   end
 end
