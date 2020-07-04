@@ -15,27 +15,33 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col s12">
-    <div class="card-panel">
-      <div id="total-clicks-chart"></div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s6">
-    <div class="card-panel">
-      <div id="platforms-chart"></div>
+<% if @daily_clicks.present? %>
+  <div class="row">
+    <div class="col s12">
+      <div class="card-panel">
+        <div id="total-clicks-chart"></div>
+      </div>
     </div>
   </div>
 
-  <div class="col s6">
-    <div class="card-panel">
-      <div id="browsers-chart"></div>
+  <div class="row">
+    <div class="col s6">
+      <div class="card-panel">
+        <div id="platforms-chart"></div>
+      </div>
+    </div>
+
+    <div class="col s6">
+      <div class="card-panel">
+        <div id="browsers-chart"></div>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <div class="center">
+    <h4>Data is not available, try later.</h4>
+  </div>
+<% end %>
 
 <script>
   google.charts.load('current', {packages: ['corechart']});

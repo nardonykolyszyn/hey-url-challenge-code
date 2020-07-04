@@ -19,27 +19,33 @@ class UrlsController < ApplicationController
   end
 
   def show
-    @daily_clicks = url.newest_clicks.group_by do |c|
-      c.created_at.strftime('%d')
-    end.transform_values(&:count).to_a
+    if url
+      @daily_clicks = url.newest_clicks.group_by do |c|
+        c.created_at.strftime('%d')
+      end.transform_values(&:count).to_a
 
-    @browsers_clicks = url.newest_clicks.group_by do |c|
-      c.browser
-    end.transform_values(&:count).to_a
+      @browsers_clicks = url.newest_clicks
+                            .group_by(&:browser)
+                            .transform_values(&:count).to_a
 
-    @platform_clicks = url.newest_clicks.group_by do |c|
-      c.platform
-    end.transform_values(&:count).to_a
+      @platform_clicks = url.newest_clicks
+                            .group_by(&:platform)
+                            .transform_values(&:count).to_a
+    else
+      not_found
+    end
   end
 
   def visit
     browser = Browser.new(request.env['HTTP_USER_AGENT'])
 
-    if url.persisted?
+    if url
       new_click = url.register_click(browser)
       url.register_counter_click if new_click
 
       redirect_to url.original_url, status: :moved_permanently
+    else
+      not_found
     end
   end
 
