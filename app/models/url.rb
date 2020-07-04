@@ -11,7 +11,6 @@ class Url < ApplicationRecord
   }
   # Associations
   has_many :clicks
-
   # Scopes
   def newest_clicks
     clicks.where('created_at >= ? AND created_at <= ?', Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
