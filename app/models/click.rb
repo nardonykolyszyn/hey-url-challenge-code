@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
 class Click < ApplicationRecord
-  belongs_to :url
+  # Associations
+  belongs_to :url, touch: true
 end
